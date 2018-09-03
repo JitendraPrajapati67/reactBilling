@@ -162,11 +162,6 @@ const Colors = Loadable({
   loading: Loading
 });
 
-const Category = Loadable({
-  loader: () => import("./views/Admin/Category/Category"),
-  loading: Loading
-});
-
 const Typography = Loadable({
   loader: () => import("./views/Theme/Typography"),
   loading: Loading
@@ -187,17 +182,45 @@ const User = Loadable({
   loading: Loading
 });
 
+//admin route
+const Agent = Loadable({
+  loader: () => import("./views/Admin/Agent/Agent"),
+  loading: Loading
+});
+
+const Category = Loadable({
+  loader: () => import("./views/Admin/Category/Category"),
+  loading: Loading
+});
+
+const Product = Loadable({
+  loader: () => import("./views/Admin/Product/Product"),
+  loading: Loading
+});
+
+const Order = Loadable({
+  loader: () => import("./views/Admin/Order/Order"),
+  loading: Loading
+});
+
+const Invoice = Loadable({
+  loader: () => import("./views/Admin/Invoice/Invoice"),
+  loading: Loading
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: "/", exact: true, name: "Home", component: DefaultLayout },
+  //admin
+  { path: "/admin/Agent", name: "Agent", component: Agent },
+  { path: "/admin/category", name: "Category", component: Category },
+  { path: "/admin/product", name: "Product", component: Product },
+  { path: "/admin/order", name: "Order", component: Order },
+  { path: "/admin/invoice", name: "Invoice", component: Invoice },
+
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },
   { path: "/theme", exact: true, name: "Theme", component: Colors },
   { path: "/theme/colors", name: "Colors", component: Colors },
-
-  //admin
-  { path: "/admin/category", name: "Category", component: Category },
-
   { path: "/theme/typography", name: "Typography", component: Typography },
   { path: "/base", exact: true, name: "Base", component: Cards },
   { path: "/base/cards", name: "Cards", component: Cards },

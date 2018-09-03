@@ -61,13 +61,13 @@ class ThemeColor extends Component {
   }
 }
 
-class Agent extends Component {
+class Invoice extends Component {
   render() {
     return (
       <div className="animated fadeIn">
         <div className="card">
           <div className="card-header">
-            <i className="icon-drop" /> Create Agent
+            <i className="icon-drop" /> Create Invoice
           </div>
           <div className="card-body">
             <Row>
@@ -181,4 +181,4 @@ class Agent extends Component {
   }
 }
 
-export default Agent;
+export default Invoice;

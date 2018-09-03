@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
-import { Row, Col } from "reactstrap";
 import { rgbToHex } from "@coreui/coreui/dist/js/coreui-utilities";
-
+import {
+  Badge,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Row,
+  Table
+} from "reactstrap";
 class ThemeView extends Component {
   constructor(props) {
     super(props);
@@ -65,117 +75,95 @@ class Category extends Component {
   render() {
     return (
       <div className="animated fadeIn">
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Category
-          </div>
-          <div className="card-body">
-            <Row>
-              <ThemeColor className="bg-primary">
-                <h6>Brand Primary Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-secondary">
-                <h6>Brand Secondary Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-success">
-                <h6>Brand Success Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-danger">
-                <h6>Brand Danger Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-warning">
-                <h6>Brand Warning Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-info">
-                <h6>Brand Info Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-light">
-                <h6>Brand Light Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-dark">
-                <h6>Brand Dark Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Grays
-          </div>
-          <div className="card-body">
-            <Row className="mb-3">
-              <ThemeColor className="bg-gray-100">
-                <h6>Gray 100 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-200">
-                <h6>Gray 200 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-300">
-                <h6>Gray 300 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-400">
-                <h6>Gray 400 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-500">
-                <h6>Gray 500 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-600">
-                <h6>Gray 600 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-700">
-                <h6>Gray 700 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-800">
-                <h6>Gray 800 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-900">
-                <h6>Gray 900 Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
-        </div>
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Additional colors
-          </div>
-          <div className="card-body">
-            <Row>
-              <ThemeColor className="bg-blue">
-                <h6>Blue Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-light-blue">
-                <h6>Light Blue Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-indigo">
-                <h6>Indigo Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-purple">
-                <h6>Purple Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-pink">
-                <h6>Pink Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-red">
-                <h6>Red Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-orange">
-                <h6>Orange Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-yellow">
-                <h6>Yellow Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-green">
-                <h6>Green Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-teal">
-                <h6>Teal Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-cyan">
-                <h6>Cyan Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
-        </div>
+        <Row>
+          <Col>
+            <Card>
+              <CardHeader>
+                <i className="fa fa-align-justify" /> Category List
+              </CardHeader>
+              <CardBody>
+                <Table hover bordered striped responsive size="sm">
+                  <thead>
+                    <tr>
+                      <th>Id</th>
+                      <th>Description</th>
+                      <th>Type</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Vishnu Serghei</td>
+                      <td>2012/01/01</td>
+                      <td>Member</td>
+                      <td>
+                        <Badge color="success">Active</Badge>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Zbyněk Phoibos</td>
+                      <td>2012/02/01</td>
+                      <td>Staff</td>
+                      <td>
+                        <Badge color="danger">Banned</Badge>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Einar Randall</td>
+                      <td>2012/02/01</td>
+                      <td>Admin</td>
+                      <td>
+                        <Badge color="secondary">Inactive</Badge>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Félix Troels</td>
+                      <td>2012/03/01</td>
+                      <td>Member</td>
+                      <td>
+                        <Badge color="warning">Pending</Badge>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Aulus Agmundr</td>
+                      <td>2012/01/21</td>
+                      <td>Staff</td>
+                      <td>
+                        <Badge color="success">Active</Badge>
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+                <nav>
+                  <Pagination>
+                    <PaginationItem>
+                      <PaginationLink previous tag="button">
+                        Prev
+                      </PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem active>
+                      <PaginationLink tag="button">1</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink tag="button">2</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink tag="button">3</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink tag="button">4</PaginationLink>
+                    </PaginationItem>
+                    <PaginationItem>
+                      <PaginationLink next tag="button">
+                        Next
+                      </PaginationLink>
+                    </PaginationItem>
+                  </Pagination>
+                </nav>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     );
   }
