@@ -88,6 +88,7 @@ class Category extends Component {
       )
       .then(res => {
         const persons = res.data.data;
+        console.log(res);
         this.setState({ persons });
       });
   }
@@ -102,11 +103,6 @@ class Category extends Component {
                 <i className="fa fa-align-justify" /> Category List
               </CardHeader>
               <CardBody>
-                <ul>
-                  {this.state.persons.map(person => (
-                    <li>{person.name}</li>
-                  ))}
-                </ul>
                 <Table hover bordered striped responsive size="sm">
                   <thead>
                     <tr>
@@ -117,46 +113,16 @@ class Category extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Vishnu Serghei</td>
-                      <td>2012/01/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Zbyněk Phoibos</td>
-                      <td>2012/02/01</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="danger">Banned</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Einar Randall</td>
-                      <td>2012/02/01</td>
-                      <td>Admin</td>
-                      <td>
-                        <Badge color="secondary">Inactive</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Félix Troels</td>
-                      <td>2012/03/01</td>
-                      <td>Member</td>
-                      <td>
-                        <Badge color="warning">Pending</Badge>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Aulus Agmundr</td>
-                      <td>2012/01/21</td>
-                      <td>Staff</td>
-                      <td>
-                        <Badge color="success">Active</Badge>
-                      </td>
-                    </tr>
+                    {this.state.persons.map(person => (
+                      <tr key={person.id}>
+                        <td>{person.id}</td>
+                        <td>{person.description}</td>
+                        <td>{person.orderLineTypeId}</td>
+                        <td>
+                          <Badge color="success">Active</Badge>
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
                 <nav>
