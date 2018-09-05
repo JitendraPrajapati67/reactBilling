@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 import ReactDOM from "react-dom";
 import classNames from "classnames";
 import { rgbToHex } from "@coreui/coreui/dist/js/coreui-utilities";
@@ -72,6 +73,25 @@ class ThemeColor extends Component {
 }
 
 class Category extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      persons: []
+    };
+  }
+
+  componentDidMount() {
+    axios
+      .get(
+        "http://localhost/reactBillingAdmin/api/public/api/getAllItemCategories"
+      )
+      .then(res => {
+        const persons = res.data.data;
+        this.setState({ persons });
+      });
+  }
+
   render() {
     return (
       <div className="animated fadeIn">
@@ -82,6 +102,11 @@ class Category extends Component {
                 <i className="fa fa-align-justify" /> Category List
               </CardHeader>
               <CardBody>
+                <ul>
+                  {this.state.persons.map(person => (
+                    <li>{person.name}</li>
+                  ))}
+                </ul>
                 <Table hover bordered striped responsive size="sm">
                   <thead>
                     <tr>

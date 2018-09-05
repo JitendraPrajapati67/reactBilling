@@ -17,7 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('doLogin','SoapController@doLogin');
+Route::group(['middleware' => ['cors']], function ($router) {
+    
+    //Add you routes here, for example:
+    Route::post('doLogin','SoapController@doLogin');
+    
+    //admin
+    Route::get('getAllItemCategories','SoapController@getAllItemCategories');
+});
 
-//admin
-Route::get('getAllItemCategories','SoapController@getAllItemCategories');
