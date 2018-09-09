@@ -21,7 +21,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Add you routes here, for example:
 Route::post('doLogin','SoapController@doLogin');
 
-//admin
+//=================== admin =====================//
+
+//category
 Route::get('getAllItemCategories','SoapController@getAllItemCategories');
 
+//customer
+Route::post('getAllConsumer','SoapController@getAllConsumer');
 
+//product
+Route::get('getAllProduct','SoapController@getAllProduct');

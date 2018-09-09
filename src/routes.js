@@ -193,6 +193,11 @@ const Category = Loadable({
   loading: Loading
 });
 
+const CreateCategory = Loadable({
+  loader: () => import("./views/Admin/Category/Create"),
+  loading: Loading
+});
+
 const Product = Loadable({
   loader: () => import("./views/Admin/Product/Product"),
   loading: Loading
@@ -213,6 +218,12 @@ const routes = [
   //admin
   { path: "/admin/Agent", name: "Agent", component: Agent },
   { path: "/admin/category", name: "Category", component: Category },
+  {
+    path: "/admin/category/create",
+    name: "CreateCategory",
+    component: CreateCategory
+  },
+
   { path: "/admin/product", name: "Product", component: Product },
   { path: "/admin/order", name: "Order", component: Order },
   { path: "/admin/invoice", name: "Invoice", component: Invoice },

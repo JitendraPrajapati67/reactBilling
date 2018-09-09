@@ -283,10 +283,11 @@ class SoapController extends Controller
     public function getAllConsumer(Request $request){
         try{
             $pageno=$request->input('pageno');
-            $result = $client->call("getAllCustomers",array("arg0"=>20,"arg1"=>$pageno));
+            $result = $this->client->call("getAllCustomers",array("arg0"=>20,"arg1"=>$pageno));
             if (isset($result['faultstring'])) {
                  Log::error("getAllCustomers Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
-                $response = Response::json(array('code' => 500, 'message' => 'all consumer', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                 $response = Response::json(array('code' => 500, 'message' => 'all consumer', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                return $response;
             }
             $consumer = $result['return'];
             $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $consumer));
@@ -348,13 +349,15 @@ class SoapController extends Controller
         return $response; 
     }
 
+    // ===================== PRODUCTS ===============================//
     //GET ALL PRODUCTS
     public function getAllProduct(){
         try{
-            $result = $client->call("getAllItems"));
+            $result = $this->client->call("getAllItems");
             if (isset($result['faultstring'])) {
                  Log::error("getAllItems Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
                 $response = Response::json(array('code' => 500, 'message' => 'all poducts', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                return $response;
             }
             $product = $result['return'];
             $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $product));

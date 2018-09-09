@@ -1,183 +1,152 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import classNames from "classnames";
-import { Row, Col } from "reactstrap";
-import { rgbToHex } from "@coreui/coreui/dist/js/coreui-utilities";
+import axios from "axios";
 
-class ThemeView extends Component {
+import {
+  Badge,
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Pagination,
+  PaginationItem,
+  PaginationLink,
+  Row,
+  Table,
+  Nav,
+  NavItem,
+  NavLink
+} from "reactstrap";
+
+function CategoryRow(props) {}
+
+class Product extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      bgColor: "rgb(255, 255, 255)"
+      categories: [],
+      loading: true
     };
   }
 
   componentDidMount() {
-    const elem = ReactDOM.findDOMNode(this).parentNode.firstChild;
-    const color = window
-      .getComputedStyle(elem)
-      .getPropertyValue("background-color");
-    this.setState({
-      bgColor: color || this.state.bgColor
-    });
+    axios
+      .get("http://localhost/reactBillingAdmin/api/public/api/getAllProduct")
+      .then(res => {
+        const categories = res.data.data;
+        this.setState({
+          categories,
+          loading: false
+        });
+      })
+      .catch(function(error) {
+        // handle error
+        console.log(error);
+      });
   }
 
   render() {
-    return (
-      <table className="w-100">
-        <tbody>
-          <tr>
-            <td className="text-muted">HEX:</td>
-            <td className="font-weight-bold">{rgbToHex(this.state.bgColor)}</td>
-          </tr>
-          <tr>
-            <td className="text-muted">RGB:</td>
-            <td className="font-weight-bold">{this.state.bgColor}</td>
-          </tr>
-        </tbody>
-      </table>
-    );
-  }
-}
-
-class ThemeColor extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
-  render() {
-    // const { className, children, ...attributes } = this.props
-    const { className, children } = this.props;
-
-    const classes = classNames(className, "theme-color w-75 rounded mb-3");
-
-    return (
-      <Col xl="2" md="4" sm="6" xs="12" className="mb-4">
-        <div className={classes} style={{ paddingTop: "75%" }} />
-        {children}
-        <ThemeView />
-      </Col>
-    );
-  }
-}
-
-class Product extends Component {
-  render() {
-    return (
-      <div className="animated fadeIn">
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Product
-          </div>
-          <div className="card-body">
-            <Row>
-              <ThemeColor className="bg-primary">
-                <h6>Brand Primary Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-secondary">
-                <h6>Brand Secondary Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-success">
-                <h6>Brand Success Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-danger">
-                <h6>Brand Danger Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-warning">
-                <h6>Brand Warning Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-info">
-                <h6>Brand Info Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-light">
-                <h6>Brand Light Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-dark">
-                <h6>Brand Dark Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
+    const createLink = "#/admin/category/create";
+    const getorderLineType = status => {
+      return status === "1"
+        ? "Items"
+        : status === "2"
+          ? "Tax"
+          : status === "3"
+            ? "Penalty"
+            : "-";
+    };
+    if (this.state.loading) {
+      return (
+        <div>
+          <i className="fa fa-spinner fa-spin" /> Loading...
         </div>
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Grays
-          </div>
-          <div className="card-body">
-            <Row className="mb-3">
-              <ThemeColor className="bg-gray-100">
-                <h6>Gray 100 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-200">
-                <h6>Gray 200 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-300">
-                <h6>Gray 300 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-400">
-                <h6>Gray 400 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-500">
-                <h6>Gray 500 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-600">
-                <h6>Gray 600 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-700">
-                <h6>Gray 700 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-800">
-                <h6>Gray 800 Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-gray-900">
-                <h6>Gray 900 Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
+      );
+    } else {
+      return (
+        <div className="animated fadeIn">
+          <Row>
+            <Col>
+              <Card>
+                <CardHeader>
+                  <i className="fa fa-align-justify" /> Product
+                  <small className="text-muted"> List</small>
+                  <a
+                    href={createLink}
+                    className="btn btn-sm btn-primary float-right"
+                  >
+                    <i className="fa fa-plus" /> Add New Product
+                  </a>
+                </CardHeader>
+                <CardBody>
+                  <Table hover bordered striped responsive size="sm">
+                    <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Number</th>
+                        <th>Description</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.state.categories.map(product => (
+                        <tr key={product.id}>
+                          <td>{product.id}</td>
+                          <td>{product.number}</td>
+                          <td>{product.description}</td>
+                          <td>{getorderLineType(product.orderLineTypeId)}</td>
+                          <td>
+                            <a
+                              href={createLink}
+                              className="btn btn-sm btn-info mr-1"
+                            >
+                              <i className="fa fa-pencil" />
+                            </a>
+                            <a
+                              href={createLink}
+                              className="btn btn-sm btn-danger"
+                            >
+                              <i className="fa fa-trash" />
+                            </a>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </Table>
+                  <nav>
+                    <Pagination>
+                      <PaginationItem>
+                        <PaginationLink previous tag="button">
+                          Prev
+                        </PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem active>
+                        <PaginationLink tag="button">1</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink tag="button">2</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink tag="button">3</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink tag="button">4</PaginationLink>
+                      </PaginationItem>
+                      <PaginationItem>
+                        <PaginationLink next tag="button">
+                          Next
+                        </PaginationLink>
+                      </PaginationItem>
+                    </Pagination>
+                  </nav>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
         </div>
-        <div className="card">
-          <div className="card-header">
-            <i className="icon-drop" /> Additional colors
-          </div>
-          <div className="card-body">
-            <Row>
-              <ThemeColor className="bg-blue">
-                <h6>Blue Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-light-blue">
-                <h6>Light Blue Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-indigo">
-                <h6>Indigo Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-purple">
-                <h6>Purple Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-pink">
-                <h6>Pink Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-red">
-                <h6>Red Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-orange">
-                <h6>Orange Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-yellow">
-                <h6>Yellow Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-green">
-                <h6>Green Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-teal">
-                <h6>Teal Color</h6>
-              </ThemeColor>
-              <ThemeColor className="bg-cyan">
-                <h6>Cyan Color</h6>
-              </ThemeColor>
-            </Row>
-          </div>
-        </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
