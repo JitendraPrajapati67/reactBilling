@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import API from "../../../api";
 
 import {
   Badge,
@@ -17,7 +17,16 @@ import {
   NavLink
 } from "reactstrap";
 
-function CategoryRow(props) {}
+function precise(x) {
+  if (x === Number.NaN) {
+    return 0.0;
+  }
+  if (isNaN(x)) {
+    return 0.0;
+  }
+
+  return Number.parseFloat(x).toPrecision(3);
+}
 
 class Product extends Component {
   constructor(props) {
@@ -30,8 +39,7 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get("http://localhost/reactBillingAdmin/api/public/api/getAllProduct")
+    API.get("/getAllProduct")
       .then(res => {
         const categories = res.data.data;
         this.setState({
@@ -97,7 +105,7 @@ class Product extends Component {
                           <td>{product.number}</td>
                           <td>{product.description}</td>
                           <td>{getorderLineType(product.orderLineTypeId)}</td>
-                          <td>{product.price}</td>
+                          <td>{precise(product.price)}</td>
                           <td>
                             <a
                               href={createLink}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
-
+import API from "../../../api";
 import {
   Badge,
   Card,
@@ -30,10 +29,7 @@ class Category extends Component {
   }
 
   componentDidMount() {
-    axios
-      .get(
-        "http://localhost/reactBillingAdmin/api/public/api/getAllItemCategories"
-      )
+    API.get("/getAllItemCategories")
       .then(res => {
         const categories = res.data.data;
         this.setState({

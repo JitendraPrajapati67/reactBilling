@@ -4,7 +4,11 @@ import Loadable from "react-loadable";
 import DefaultLayout from "./containers/DefaultLayout";
 
 function Loading() {
-  return <div>Loading...</div>;
+  return (
+    <div>
+      <i className="fa fa-spinner fa-spin" /> Loading...
+    </div>
+  );
 }
 
 const Breadcrumbs = Loadable({
@@ -213,20 +217,43 @@ const Invoice = Loadable({
   loading: Loading
 });
 
+const Customers = Loadable({
+  loader: () => import("./views/Admin/Customer/Customers"),
+  loading: Loading
+});
+
+const Customer = Loadable({
+  loader: () => import("./views/Admin/Customer/Customer"),
+  loading: Loading
+});
+
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
   //admin
   { path: "/admin/Agent", name: "Agent", component: Agent },
-  { path: "/admin/category", name: "Category", component: Category },
+  {
+    path: "/admin/category",
+    exact: true,
+    name: "Category",
+    component: Category
+  },
   {
     path: "/admin/category/create",
-    name: "CreateCategory",
+    exact: true,
+    name: "Create Category",
     component: CreateCategory
   },
 
   { path: "/admin/product", name: "Product", component: Product },
   { path: "/admin/order", name: "Order", component: Order },
   { path: "/admin/invoice", name: "Invoice", component: Invoice },
+  {
+    path: "/admin/customers",
+    exact: true,
+    name: "customers",
+    component: Customers
+  },
+  { path: "/users/:id", exact: true, name: "User Details", component: User },
 
   { path: "/", exact: true, name: "Home", component: DefaultLayout },
   { path: "/dashboard", name: "Dashboard", component: Dashboard },

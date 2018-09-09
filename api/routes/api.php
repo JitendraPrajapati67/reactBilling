@@ -25,6 +25,8 @@ Route::post('doLogin','SoapController@doLogin');
 
 //category
 Route::get('getAllItemCategories','SoapController@getAllItemCategories');
+Route::post('createItemCategory','SoapController@createItemCategory');
+Route::post('deleteItemCategory','SoapController@deleteItemCategory');
 
 //customer
 Route::post('getAllConsumer','SoapController@getAllConsumer');
