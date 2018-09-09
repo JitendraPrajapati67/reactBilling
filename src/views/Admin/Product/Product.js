@@ -86,6 +86,7 @@ class Product extends Component {
                         <th>Number</th>
                         <th>Description</th>
                         <th>Type</th>
+                        <th>Price</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -96,6 +97,7 @@ class Product extends Component {
                           <td>{product.number}</td>
                           <td>{product.description}</td>
                           <td>{getorderLineType(product.orderLineTypeId)}</td>
+                          <td>{product.price}</td>
                           <td>
                             <a
                               href={createLink}
