@@ -69,9 +69,13 @@ class Create extends Component {
           <Col xs="8" sm="8">
             <Card>
               <CardHeader>
-                <strong>Category</strong>
+                <strong>
+                  <i className="fa fa-edit" />
+                  Category
+                </strong>
                 <small> Form</small>
               </CardHeader>
+
               <form onSubmit={this.handleSubmit}>
                 <CardBody>
                   <Row>
