@@ -176,8 +176,8 @@ class Login extends Component {
     }
   render() {
      var divStyle = {
-     borderBottom:none,
-     marginTop:90
+     // borderBottom:none,
+     // marginTop:90
     };
     return (
       <body className="login-body login-fonts">
