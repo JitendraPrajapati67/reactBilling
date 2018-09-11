@@ -3,7 +3,7 @@ import { Card, CardBody, CardHeader, Col, Row, Table } from "reactstrap";
 
 import usersData from "./UsersData";
 
-class User extends Component {
+class Customer extends Component {
   render() {
     const user = usersData.find(
       user => user.id.toString() === this.props.match.params.id
@@ -55,4 +55,4 @@ class User extends Component {
   }
 }
 
-export default User;
+export default Customer;

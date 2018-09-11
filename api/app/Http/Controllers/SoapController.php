@@ -92,6 +92,7 @@ class SoapController extends Controller
 //         }
     }
 
+    //======================== Category ============================//
     public function getAllItemCategories(){
         try{
             $result = $this->client->call("getAllItemCategories");
@@ -105,6 +106,42 @@ class SoapController extends Controller
             $response = Response::json(array('code' => 201, 'message' => 'category List', 'cause' => $e->getMessage(), 'data' => json_decode("{}")));
         }
         return $response;
+    }
+
+    //CREATE CATEGORY
+    public function createItemCategory(Request $request){
+        try{
+            $item=array('description'=>"testing team","orderLineTypeId"=>1);
+            $result = $client->call("createItemCategory",array('arg0'=>$item));
+            if (isset($result['faultstring'])) {
+                    Log::error("createItemCategory Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
+                $response = Response::json(array('code' => 500, 'message' => 'category ', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+            }
+            $category = $result['return'];
+            $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $category));
+        }catch (Exception $e){
+            Log::error("createItemCategory Error :", ['Error : ' => $e->getMessage(), '\nTraceAsString' => $e->getTraceAsString()]);
+            $response = Response::json(array('code' => 201, 'message' => 'category', 'cause' => $e->getMessage(), 'data' => json_decode("{}")));
+        }
+        return $response; 
+    }
+    
+    //DELETE CATEGORY
+    public function deleteItemCategory(Request $request){
+        try{
+            $itemId=$request->input('itemId');
+            $result = $client->call("deleteItemCategory", array("arg0" => $itemId));
+            if (isset($result['faultstring'])) {
+                    Log::error("deleteItemCategory Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
+                $response = Response::json(array('code' => 500, 'message' => 'delete category', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+            }
+            $item = $result['return'];
+            $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $item));
+        }catch (Exception $e){
+            Log::error("deleteItemCategory Error :", ['Error : ' => $e->getMessage(), '\nTraceAsString' => $e->getTraceAsString()]);
+            $response = Response::json(array('code' => 201, 'message' => 'delete category', 'cause' => $e->getMessage(), 'data' => json_decode("{}")));
+        }
+        return $response; 
     }
 
     //CREATE AGENT
@@ -285,10 +322,11 @@ class SoapController extends Controller
     public function getAllConsumer(Request $request){
         try{
             $pageno=$request->input('pageno');
-            $result = $client->call("getAllCustomers",array("arg0"=>20,"arg1"=>$pageno));
+            $result = $this->client->call("getAllCustomers",array("arg0"=>20,"arg1"=>$pageno));
             if (isset($result['faultstring'])) {
                  Log::error("getAllCustomers Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
-                $response = Response::json(array('code' => 500, 'message' => 'all consumer', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                 $response = Response::json(array('code' => 500, 'message' => 'all consumer', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                return $response;
             }
             $consumer = $result['return'];
             $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $consumer));
@@ -350,13 +388,15 @@ class SoapController extends Controller
         return $response; 
     }
 
+    // ===================== PRODUCTS ===============================//
     //GET ALL PRODUCTS
     public function getAllProduct(){
         try{
-            $result = $client->call("getAllItems"));
+            $result = $this->client->call("getAllItems");
             if (isset($result['faultstring'])) {
                  Log::error("getAllItems Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
                 $response = Response::json(array('code' => 500, 'message' => 'all poducts', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
+                return $response;
             }
             $product = $result['return'];
             $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $product));
@@ -714,23 +754,6 @@ class SoapController extends Controller
         return $response; 
     }
 
-    //CREATE CATEGORY
-    public function createItemCategory(Request $request){
-        try{
-            $item=array('description'=>"testing team","orderLineTypeId"=>1);
-            $result = $client->call("createItemCategory",array('arg0'=>$item));
-            if (isset($result['faultstring'])) {
-                 Log::error("createItemCategory Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
-                $response = Response::json(array('code' => 500, 'message' => 'category ', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
-            }
-            $category = $result['return'];
-            $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $category));
-        }catch (Exception $e){
-            Log::error("createItemCategory Error :", ['Error : ' => $e->getMessage(), '\nTraceAsString' => $e->getTraceAsString()]);
-            $response = Response::json(array('code' => 201, 'message' => 'category', 'cause' => $e->getMessage(), 'data' => json_decode("{}")));
-        }
-        return $response; 
-    }
     //DELETE ITEM
     public function deleteItem(Request $request){
         try{
@@ -748,23 +771,7 @@ class SoapController extends Controller
         }
         return $response; 
     }
-    //DELETE CATEGORY
-    public function deleteItemCategory(Request $request){
-        try{
-            $itemId=$request->input('itemId');
-            $result = $client->call("deleteItemCategory", array("arg0" => $itemId));
-            if (isset($result['faultstring'])) {
-                 Log::error("deleteItemCategory Error :", ['Error : ' => $result['faultstring'], '\nTraceAsString' => $result['faultstring']]);
-                $response = Response::json(array('code' => 500, 'message' => 'delete category', 'cause' => $result['faultstring'], 'data' => json_decode("{}")));
-            }
-            $item = $result['return'];
-            $response = Response::json(array('code' => 200, 'message' => 'Record successfully fetched.', 'cause' => '', 'data' => $item));
-        }catch (Exception $e){
-            Log::error("deleteItemCategory Error :", ['Error : ' => $e->getMessage(), '\nTraceAsString' => $e->getTraceAsString()]);
-            $response = Response::json(array('code' => 201, 'message' => 'delete category', 'cause' => $e->getMessage(), 'data' => json_decode("{}")));
-        }
-        return $response; 
-    }
+
     //DELETE PAYMENT
     public function deletePayment(Request $request){
         try{

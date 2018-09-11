@@ -25,6 +25,11 @@ export default {
       icon: "icon-user"
     },
     {
+      name: "Customer",
+      url: "/admin/cusotmer",
+      icon: "fa fa-users"
+    },
+    {
       name: "category",
       url: "/admin/category",
       icon: "fa fa-book"
