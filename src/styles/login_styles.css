@@ -1,0 +1,46 @@
+.login-fonts {font-family: 'Open Sans', sans-serif;}
+.login-body {background:url(../images/login_background.jpg) no-repeat; background-size:cover; background-attachment:fixed; padding-top:150px; background-position:center;}
+.login-electricity-and-gas {background:url(../images/login-electricity-and-gas.png) no-repeat; height:527px; overflow:hidden; }
+.login-electricity-and-gas .signup_btn {text-transform:uppercase; position:absolute; bottom:80px; width:60%; left:0; right:0; margin:auto; background:#ff6c00; border-radius:100px; font-size:20px; font-weight:700; text-transform:uppercase; padding:20px 50px; border: 10px solid rgba(0,0,0,0.3); box-shadow:0 0 50px #000}
+.login-electricity-and-gas .signup_btn:active {background:#333; border: 10px solid rgba(0,0,0,0.3);}
+.login-electricity-and-gas i {margin-right:10px;}
+
+.left-box {background:#fff; border-radius:10px 0 0 10px;}
+.right-box {background:#fff; border-radius:0 10px 10px 0;}
+.login-logo {margin-top:50px;}
+
+
+/* Box Right Side */
+.form-style {margin-top:50px;}
+.form-style li {border-bottom:solid 1px #848484; margin-bottom:40px;}
+.form-style li i.user-pass {position:absolute; margin-top:3px; font-size:25px;}
+.login-form-control {outline: none; border: none !important; -webkit-box-shadow: none !important; -moz-box-shadow: none !important; box-shadow: none !important; padding-left:30px; margin-bottom:5px; font-size:16px;}
+.login-btn {font-size:15px; font-weight:700; text-transform:uppercase; padding:10px 30px; border-radius:100px; background:#000; border:none; transition: background 0.3s ease;}
+.login-btn:hover {background:#cf0001;}
+.login-btn i {margin-left:20px;}
+.forgot-password {margin-top:5px; color:#000; font-size:16px;}
+.forgot-password:hover {color:#000;}
+
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+
+.row-eq-height-xs {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+    flex-direction: row;
+}
+
+.row {
+    margin-right: -15px !important;
+    margin-left: -15px !important;
+}
+.col-md-offset-1 {
+    margin-left: 8.33333333%;
+}
+
